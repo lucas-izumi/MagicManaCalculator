@@ -1,6 +1,11 @@
 from mtgtools.MtgDB import MtgDB
 
 
+ERR_BUSY = "Search process is currently busy. Try again later!"
+ERR_BAD_FORMAT = "List format incorrect!"
+ERR_NO_ERROR = "List successfully parsed!"
+
+
 class MtgDatabase:
     total_cmc = 0
     max_cards = 0
@@ -38,16 +43,18 @@ class MtgDatabase:
         return qtd, card_name
 
     def load_stats(self, f):
-        mtg_db = MtgDB('my_db.fs')
+        try:
+            mtg_db = MtgDB('my_db.fs')
+        except:
+            return ERR_BUSY
         cards = mtg_db.root.mtgio_cards
         for lines in f.splitlines():
-            print(lines)
             try:
                 s = self.parse_element(lines)
                 pc = self.get_card(cards, s[1])
             except IndexError:
                 mtg_db.close()
-                return "List format incorrect!"
+                return ERR_BAD_FORMAT
             try:
                 if pc[0].type.find('Land') == -1:
                     self.total_cards += s[0]
@@ -61,7 +68,7 @@ class MtgDatabase:
                 mtg_db.close()
                 return "Card " + s[1] + " not found!"
         mtg_db.close()
-        return "List successfully parsed!"
+        return ERR_NO_ERROR
 
     def print_stats_str(self):
         results_str = "Mana Breakdown: " + str(self.mana_colors) + "<br>" + \
@@ -74,28 +81,3 @@ class MtgDatabase:
         self.total_cmc = 0
         self.total_cards = 0
         self.mana_colors = {'G': 0, 'R': 0, 'U': 0, 'B': 0, 'W': 0, 'C': 0, 'Generic': 0}
-
-
-# m = MtgDatabase()
-# m.update_db()
-# print(m.load_stats("deck.txt"))
-# print("Mana Breakdown: ", m.mana_colors)
-# print("Total converted mana cost: ", m.total_cmc)
-# print("Total cards parsed: ", m.total_cards)
-
-# lista = m.get_card('Kozilek, the Great Distortion')
-# print(type(lista))
-# print(lista[0].name)
-# print(lista[0].cmc)
-# m.add_cmc(lista[0].cmc)
-# print(lista[0].mana_cost)
-# print(m.mana_colors)
-# m.add_colors(lista[0].mana_cost)
-# print(m.mana_colors)
-
-# lista = m.get_card('Golgothian Sylex')
-# print(type(lista))
-# print(lista[0])
-# lista = m.get_card('Golgothian Sylexade')
-# print(type(lista))
-# print(lista)

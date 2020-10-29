@@ -15,8 +15,11 @@ def hello_world():
 def upload_file():
     if request.method == 'POST':
         deck = request.form['decklist']
-        m.load_stats(deck)
-        return m.print_stats_str()
+        response = m.load_stats(deck)
+        if response == mtginfo.ERR_BUSY:
+            return response
+        else:
+            return m.print_stats_str()
 
 
 app.run(port=5400, debug=True)
