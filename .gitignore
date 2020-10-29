@@ -1,3 +1,6 @@
 *.fs*
 .idea
 venv
+__pycache__
+deck.txt
+app.js

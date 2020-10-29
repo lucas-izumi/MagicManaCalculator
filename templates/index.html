@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Magic The Gathering: Mana Calculator</title>
+    <style>
+        div#content {
+            display: block;
+        }
+
+        div#loading {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        function preloader(){
+            document.getElementById("loading").style.display = "block";
+            document.getElementById("content").style.display = "none";
+        }
+    </script>
+</head>
+<body>
+    <div id="loading">Carregando...<br><img src="/static/loader.gif"></div>
+    <div id="content">
+        Lastest set supported: Zendikar Rising
+        <form enctype=multipart/form-data action="results" method="POST">
+            <textarea name="decklist" rows="30" cols="50" placeholder="3 Lightning Bolt&#10;4 Grizzly Bears&#10;1 Counterspell"></textarea>
+            <input type="submit" onclick="preloader()">
+        </form>
+    </div>
+</body>
+</html>
