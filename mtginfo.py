@@ -1,5 +1,4 @@
 from mtgtools.MtgDB import MtgDB
-import math
 
 
 ERR_BUSY = "Search process is currently busy. Try again later!"
@@ -10,6 +9,26 @@ GLOBALMODIFIER = 0.92  # the modifier for tweaking the final outcomes
 CARDCOUNTREF = 36  # the baseline number of cards to base the algorithm on
 MANACOUNTREF = 24  # the baseline number of mana cards
 MANACOSTPERCARDREF = 3  # the baseline mana cost per card average
+
+
+def parse_element(element):
+    card_name = ''
+    qtd = 0
+    for elem in element.split():
+        try:
+            qtd = int(elem)
+        except ValueError:
+            card_name = card_name + elem + " "
+    card_name = card_name.strip()
+    return qtd, card_name
+
+
+def update_db(mtg_db):
+    mtg_db.mtgio_update()
+
+
+def get_card(cards, card_name):
+    return cards.where_exactly(name=card_name)
 
 
 class MtgDatabase:
@@ -25,36 +44,24 @@ class MtgDatabase:
     mana_cost_modifier = 0
     suggested_total_mana = 0
 
-    def update_db(self, mtg_db):
-        mtg_db.mtgio_update()
-
-    def get_card(self, cards, card_name):
-        return cards.where_exactly(name=card_name)
-
     def add_cmc(self, cmc, qtd):
         self.total_cmc += (cmc * qtd)
 
     def add_colors(self, color_list, qtd):
         for character in color_list:
+            # Phyrexian Mana (P)
+            if character == '/' or character == 'P':
+                continue
             try:
                 self.mana_colors[character] += qtd
                 self.total_coloured_mana_cost += qtd
             except KeyError:
                 try:
+                    # Generic and Snow Mana treated here
                     generic_mana = (int(character) * qtd)
                     self.mana_colors['Generic'] += generic_mana
                 except ValueError:
                     continue
-
-    def parse_element(self, element):
-        card_name = ''
-        for elem in element.split():
-            try:
-                qtd = int(elem)
-            except ValueError:
-                card_name = card_name + elem + " "
-        card_name = card_name.strip()
-        return qtd, card_name
 
     def load_stats(self, f):
         try:
@@ -74,8 +81,8 @@ class MtgDatabase:
             except IndexError:
                 continue
             try:
-                s = self.parse_element(lines)
-                pc = self.get_card(cards, s[1])
+                s = parse_element(lines)
+                pc = get_card(cards, s[1])
             except IndexError or UnboundLocalError:
                 mtg_db.close()
                 return ERR_BAD_FORMAT

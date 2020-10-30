@@ -16,7 +16,7 @@ def upload_file():
     if request.method == 'POST':
         deck = request.form['decklist']
         response = m.load_stats(deck)
-        if response == mtginfo.ERR_BUSY or response == mtginfo.ERR_BAD_FORMAT:
+        if response != mtginfo.ERR_NO_ERROR:
             return response
         else:
             return m.print_stats_str()

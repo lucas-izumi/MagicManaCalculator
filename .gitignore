@@ -4,3 +4,4 @@ venv
 __pycache__
 deck.txt
 app.js
+refs.txt
