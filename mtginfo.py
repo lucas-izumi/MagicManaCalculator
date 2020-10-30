@@ -99,7 +99,8 @@ class MtgDatabase:
                 mtg_db.close()
                 return "Card " + s[1] + " not found!"
         mtg_db.close()
-        self.calculate_mana()
+        if self.total_cards > 0:
+            self.calculate_mana()
         return ERR_NO_ERROR
 
     def print_stats_str(self):

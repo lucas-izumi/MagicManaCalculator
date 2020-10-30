@@ -3,15 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Magic The Gathering: Mana Calculator</title>
-    <style>
-        div#content {
-            display: block;
-        }
-
-        div#loading {
-            display: none;
-        }
-    </style>
+    <link href="/static/layout.css" type="text/css" rel="stylesheet">
     <script type="text/javascript">
         function preloader(){
             document.getElementById("loading").style.display = "block";
@@ -20,12 +12,22 @@
     </script>
 </head>
 <body>
-    <div id="loading">Carregando...<br><img src="/static/loader.gif"></div>
+    <div id="loading">
+        Carregando...<br/><br/>
+        <div class="loader">
+          <div class="circle"><img src="/static/white.png"></div>
+          <div class="circle"><img src="/static/blue.png"></div>
+          <div class="circle"><img src="/static/black.png"></div>
+          <div class="circle"><img src="/static/red.png"></div>
+          <div class="circle"><img src="/static/green.png"></div>
+        </div>
+    </div>
     <div id="content">
-        Lastest set supported: Zendikar Rising
+        Lastest set supported: Zendikar Rising<br/><br/>
         <form enctype=multipart/form-data action="results" method="POST">
             <textarea name="decklist" rows="30" cols="50" placeholder="//Example&#10;3 Lightning Bolt&#10;4 Grizzly Bears&#10;1 Counterspell"></textarea>
-            <input type="submit" onclick="preloader()">
+            <br/>
+            <center><input class="button" type="submit" onclick="preloader()" value="SUBMIT"></center>
         </form>
     </div>
 </body>
