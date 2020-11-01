@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Magic The Gathering: Mana Calculator</title>
+    <link href="/static/layout.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<mainresults>
+    <div id="results">
+        <h1>Your results</h1>
+        <table style="width:100%">
+            <tr>
+                <td style="width:90%">Total converted mana cost</th>
+                <td>{{ total_cmc }}</td>
+            </tr>
+            <tr>
+                <td style="width:90%">Total coloured mana cost</td>
+                <td>{{ total_color_mana_cost }}</td>
+            </tr>
+            <tr>
+                <td style="width:90%">Total cards parsed</th>
+                <td>{{ total_cards }}</td>
+            </tr>
+            <tr>
+                <td style="width:90%">Average Mana cost per Card</th>
+                <td>{{ average_mana }}</td>
+            </tr>
+        </table>
+        <br/><br/>
+        <table style="width:100%">
+            <tr>
+                <td style="width:90%;text-align:center"><b>Suggested Total Mana</b></td>
+                <td style="text-align:center;font-size: 1.8rem">{{ suggested_mana }}</td>
+            </tr>
+            {% if white_mana > 0 %}
+            <tr>
+                <td style="width:90%;text-align:center"><img src="/static/white.png"></td>
+                <td style="text-align:center;font-size: 1.8rem">{{ white_mana }}</td>
+            </tr>
+            {% endif %}
+
+            {% if blue_mana > 0 %}
+            <tr>
+                <td style="width:90%;text-align:center"><img src="/static/blue.png"></td>
+                <td style="text-align:center;font-size: 1.8rem">{{ blue_mana }}</td>
+            </tr>
+            {% endif %}
+
+            {% if black_mana > 0 %}
+            <tr>
+                <td style="width:90%;text-align:center"><img src="/static/black.png"></td>
+                <td style="text-align:center;font-size: 1.8rem">{{ black_mana }}</td>
+            </tr>
+            {% endif %}
+
+            {% if red_mana > 0 %}
+            <tr>
+                <td style="width:90%;text-align:center"><img src="/static/red.png"></td>
+                <td style="text-align:center;font-size: 1.8rem">{{ red_mana }}</td>
+            </tr>
+            {% endif %}
+
+            {% if green_mana > 0 %}
+            <tr>
+                <td style="width:90%;text-align:center"><img src="/static/green.png"></td>
+                <td style="text-align:center;font-size: 1.8rem">{{ green_mana }}</td>
+            </tr>
+            {% endif %}
+        </table>
+        <input class="button" type="submit" onclick="window.location.href='/'" value="BACK">
+    </div>
+</mainresults>
+</body>
+</html>

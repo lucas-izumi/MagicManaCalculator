@@ -19,7 +19,18 @@ def upload_file():
         if response != mtginfo.ERR_NO_ERROR:
             return response
         else:
-            return m.print_stats_str()
+            return render_template("results.html",
+                                   total_cmc=int(m.total_cmc),
+                                   total_color_mana_cost=m.total_coloured_mana_cost,
+                                   total_cards=m.total_cards,
+                                   average_mana=m.average_mana_per_card,
+                                   suggested_mana=m.suggested_total_mana,
+                                   white_mana=m.suggested_mana_colors['W'],
+                                   blue_mana=m.suggested_mana_colors['U'],
+                                   black_mana=m.suggested_mana_colors['B'],
+                                   red_mana=m.suggested_mana_colors['R'],
+                                   green_mana=m.suggested_mana_colors['G'],
+                                   )
 
 
 app.run(port=5400, debug=True)

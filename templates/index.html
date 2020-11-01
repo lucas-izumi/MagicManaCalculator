@@ -12,8 +12,11 @@
     </script>
 </head>
 <body>
+<main>
     <div id="loading">
-        Carregando...<br/><br/>
+        <div class="load_msg">
+            Parsing card list and calculating mana...
+        </div>
         <div class="loader">
           <div class="circle"><img src="/static/white.png"></div>
           <div class="circle"><img src="/static/blue.png"></div>
@@ -23,12 +26,21 @@
         </div>
     </div>
     <div id="content">
-        Lastest set supported: Zendikar Rising<br/><br/>
+        <h1>MTG Manabase Calculator</h1>
+        <p>
+        <b>Lastest set supported: Zendikar Rising</b><br/><br/>
+            ______________________________________________________________<br><br>
+            - Paste your decklist below.<br/>
+            - Card names must be in English. <br/>
+            - For multi-faced cards, enter the name of the upper face only.<br/>
+            ______________________________________________________________<br/><br/>
+        </p>
         <form enctype=multipart/form-data action="results" method="POST">
-            <textarea name="decklist" rows="30" cols="50" placeholder="//Example&#10;3 Lightning Bolt&#10;4 Grizzly Bears&#10;1 Counterspell"></textarea>
+            <textarea name="decklist" rows="25" cols="55" placeholder="//Example&#10;3 Lightning Bolt&#10;4 Grizzly Bears&#10;1 Counterspell"></textarea>
             <br/>
             <center><input class="button" type="submit" onclick="preloader()" value="SUBMIT"></center>
         </form>
     </div>
+</main>
 </body>
 </html>

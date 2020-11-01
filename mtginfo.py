@@ -64,6 +64,7 @@ class MtgDatabase:
                     continue
 
     def load_stats(self, f):
+        self.reset_values()
         try:
             mtg_db = MtgDB('my_db.fs')
         except:
