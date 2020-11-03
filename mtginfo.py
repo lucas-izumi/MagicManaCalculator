@@ -23,8 +23,10 @@ def parse_element(element):
     return qtd, card_name
 
 
-def update_db(mtg_db):
+def update_db():
+    mtg_db = MtgDB('my_db.fs')
     mtg_db.mtgio_update()
+    mtg_db.close()
 
 
 def get_card(cards, card_name):
@@ -64,6 +66,7 @@ class MtgDatabase:
                     continue
 
     def load_stats(self, f):
+        update_db()
         self.reset_values()
         try:
             mtg_db = MtgDB('my_db.fs')
