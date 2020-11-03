@@ -2,3 +2,4 @@ Flask==1.1.2
 mtgtools==0.9.50
 ZODB==5.6.0
 requests==2.24.0
+getevent==20.9.0

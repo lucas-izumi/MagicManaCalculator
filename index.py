@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import mtginfo
+from gevent.pywsgi import WSGIServer
 
 
 app = Flask(__name__)
@@ -34,4 +35,6 @@ def upload_file():
 
 
 # app.run(port=5400, debug=True)
-app.run(host='0.0.0.0', port=5000)
+# app.run(host='0.0.0.0', port=5000)
+http_server = WSGIServer(('', 5000), app)
+http_server.serve_forever()
