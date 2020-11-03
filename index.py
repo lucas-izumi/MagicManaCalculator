@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 import mtginfo
-# from gevent.pywsgi import WSGIServer
-
+import os
 
 app = Flask(__name__)
 m = mtginfo.MtgDatabase()
@@ -34,9 +33,9 @@ def upload_file():
                                    )
 
 
-# app.run(port=5400, debug=True)
-# app.run(host='0.0.0.0', port=5000)
-# http_server = WSGIServer(('', 5000), app)
-# http_server.serve_forever()
 if __name__ == '__main__':
-    app.run()
+    is_prod = os.environ.get('PROD_ENVIRONMENT', None)
+    if is_prod:
+        app.run()
+    else:
+        app.run(port=5400, debug=True)

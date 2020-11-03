@@ -1,4 +1,4 @@
-from mtgtools.MtgDB import MtgDB
+from MtgDatabase import MtgDB
 
 
 ERR_BUSY = "Search process is currently busy. Try again later!"
@@ -24,7 +24,7 @@ def parse_element(element):
 
 
 def update_db():
-    mtg_db = MtgDB('my_db.fs')
+    mtg_db = MtgDB('my_db.fs', False)
     mtg_db.mtgio_update()
     mtg_db.close()
 
@@ -68,7 +68,7 @@ class MtgDatabase:
     def load_stats(self, f):
         self.reset_values()
         try:
-            mtg_db = MtgDB('my_db.fs')
+            mtg_db = MtgDB('my_db.fs', True)
         except:
             return ERR_BUSY
         cards = mtg_db.root.mtgio_cards
