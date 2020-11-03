@@ -1,0 +1,4 @@
+*.fs filter=lfs diff=lfs merge=lfs -text
+*.fs.index filter=lfs diff=lfs merge=lfs -text
+*.fs.old filter=lfs diff=lfs merge=lfs -text
+*.fs.lock filter=lfs diff=lfs merge=lfs -text
