@@ -34,4 +34,4 @@ def upload_file():
 
 
 # app.run(port=5400, debug=True)
-app.run()
+app.run(host='0.0.0.0', port=5000)
