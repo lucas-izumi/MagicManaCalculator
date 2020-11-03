@@ -69,8 +69,9 @@ class MtgDatabase:
         self.reset_values()
         try:
             mtg_db = MtgDB('my_db.fs')
-        except:
-            return ERR_BUSY
+        except Exception as e:
+            return e
+            # return ERR_BUSY
         cards = mtg_db.root.mtgio_cards
         for lines in f.splitlines():
             try:
