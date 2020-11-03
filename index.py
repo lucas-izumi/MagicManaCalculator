@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 import mtginfo
 import os
-import MtgDbPostgrees
 
 app = Flask(__name__)
 m = mtginfo.MtgDatabase()
@@ -14,10 +13,6 @@ def hello_world():
 
 @app.route('/results', methods=['GET', 'POST'])
 def upload_file():
-    MtgDbPostgrees.create_tables()
-    MtgDbPostgrees.insert_card("Ach! Hans, Run!", 6, "{2}{R}{R}{G}{G}")
-    MtgDbPostgrees.get_card("Ach! Hans, Run!")
-    MtgDbPostgrees.close_conn()
     if request.method == 'POST':
         deck = request.form['decklist']
         response = m.load_stats(deck)
